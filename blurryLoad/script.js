@@ -1,4 +1,4 @@
-const loadText = document.querySelector('.loadingText')
+const loadText = document.querySelector('.loading-text')
 const bg = document.querySelector('.bg')
 
 let load = 0
@@ -8,15 +8,18 @@ let int = setInterval(blurring, 30)
 function blurring () {
     load++
 
-    if (load > 99){
+    if (load > 99) {
         clearInterval(int)
     }
     
 
     loadText.innerText = `${load}%`
     loadText.style.opacity = scale(load, 0, 100, 1, 0)
+    bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`
 }
 
-const scale = (num, in_Min, in_Max, out_Min, out_Max) => {
-    return (num - in_Min) * (out_Max - out_Min) / (in_Max - in_Min) + outMin;
+//https://stackoverflow.com/questions/16100543/uncaught-typeerror-cannot-set-property-value-of-null
+
+const scale = (num, in_min, in_max, out_min, out_max) => {
+ return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
 }
